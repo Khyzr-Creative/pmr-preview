@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Private preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Montserrat:wght@700..800&display=swap">
+<script>document.documentElement.className = 'js is-checking';</script>
+<style>
+:root { --black: #000000; --lifted: #171717; --teal-black: #04161C; --dark-gray: #2F2F2F; --mid-gray: #8B8B90; --light-gray: #F3F3F3; --white: #FFFFFF; --orange: #F54703; --teal: #00434D; --green: #46D38A; --amber: #FFB020; --pink: #FF6584; --bg: var(--black); --bg-2: var(--lifted); --fg: var(--light-gray); --fg-2: var(--mid-gray); --line: var(--dark-gray); --edge: var(--mid-gray); --accent: var(--orange); --accent-ink: var(--black); --accent-text: var(--orange); --accent-2: var(--teal); --accent-2-ink: var(--light-gray); --ok: var(--green); --warn: var(--amber); --err: var(--pink); --focus: var(--light-gray); --font-display: "Montserrat", "Arial Black", sans-serif; --font-text: "DM Sans", system-ui, sans-serif; --w-display: 800; --w-heading: 700; --w-text: 400; --w-medium: 500; --w-strong: 700; --fs-display-1: clamp(2.5rem, 1.1rem + 5.6vw, 7.25rem); --fs-display-2: clamp(2.25rem, 1.1rem + 3.9vw, 5rem); --fs-figure: clamp(2.75rem, 1.4rem + 4.2vw, 5.75rem); --fs-h2: clamp(1.875rem, 1.4rem + 2.2vw, 3.5rem); --fs-h3: clamp(1.3125rem, 1.15rem + .8vw, 1.875rem); --fs-h4: .9375rem; --fs-lead: clamp(1.125rem, 1.02rem + .5vw, 1.4375rem); --fs-body: 1rem; --fs-small: .875rem; --fs-control: .875rem; --fs-control-s: .75rem; --fs-label: .6875rem; --track-display: -.022em; --track-heading: -.012em; --track-h4: .06em; --track-control: .09em; --track-label: .14em; --lh-display: .98; --lh-heading: 1.1; --lh-lead: 1.38; --lh-text: 1.55; --lh-small: 1.45; --radius: 0px; --border: 2px; --rule: 2px; --hair: 1px; --marker: .6em; --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 40px; --s-8: 48px; --s-9: 64px; --s-10: 80px; --s-11: 120px; --container: 1206px; --gutter: clamp(24px, 5.86vw, 80px); --gap: clamp(16px, 1.76vw, 24px); --section-y: clamp(64px, 8.8vw, 120px); --dur-press: 80ms; --dur-hover: 450ms; --dur-change: 600ms; --dur-enter: 900ms; --stagger: 110ms; --ease: cubic-bezier(.625, .05, 0, 1); --stroke: linear-gradient(currentColor 0 0); --plus: var(--stroke) 50% 50% / 100% 1.5px no-repeat, var(--stroke) 50% 50% / 1.5px 100% no-repeat; --corners: var(--stroke) 0 4px / 9px 1px no-repeat, var(--stroke) 4px 0 / 1px 9px no-repeat, var(--stroke) 100% 4px / 9px 1px no-repeat, var(--stroke) calc(100% - 4px) 0 / 1px 9px no-repeat, var(--stroke) 0 calc(100% - 4px) / 9px 1px no-repeat, var(--stroke) 4px 100% / 1px 9px no-repeat, var(--stroke) 100% calc(100% - 4px) / 9px 1px no-repeat, var(--stroke) calc(100% - 4px) 100% / 1px 9px no-repeat; }
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--bg); color: var(--fg); -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100svh; display: grid; font-family: var(--font-text); font-size: var(--fs-body); line-height: var(--lh-text); -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--accent-2); color: var(--accent-2-ink); }
+
+/* The statement on the left, the form on the right, both standing on one line. */
+.gate { width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto; padding-block: var(--section-y); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); align-content: center; align-items: end; row-gap: var(--s-9); }
+.gate__say { grid-column: 1 / span 6; }
+.gate__form { grid-column: 8 / -1; }
+.gate h1 { margin: 0; font-family: var(--font-display); font-weight: var(--w-display); font-size: var(--fs-display-2); line-height: var(--lh-display); letter-spacing: var(--track-display); text-transform: uppercase; }
+.gate h1 span { display: block; }
+.gate__lead { margin: var(--s-5) 0 0; max-width: 26em; color: var(--fg-2); font-size: var(--fs-lead); line-height: var(--lh-lead); text-wrap: pretty; }
+html:not(.js) .gate__form, html.is-checking .gate__form { visibility: hidden; }
+.gate__note { grid-column: 8 / -1; margin: 0; color: var(--fg-2); }
+html.js .gate__note--nojs { display: none; }
+.gate__note[hidden] { display: none; }
+
+/* Label on the left, answer on the right, a hairline under each. */
+.fields { display: grid; border-top: var(--hair) solid var(--line); }
+.field { position: relative; display: grid; grid-template-columns: minmax(6.5em, 36%) minmax(0, 1fr); align-items: baseline; gap: 0 16px; min-width: 0; padding-block: 15px 14px; border-bottom: var(--hair) solid var(--line); transition: border-color var(--dur-hover) var(--ease); }
+.field__label { position: relative; font-family: var(--font-display); font-weight: var(--w-heading); text-transform: uppercase; letter-spacing: var(--track-control); font-size: var(--fs-label); line-height: 1.25; color: var(--fg); transition: padding-left var(--dur-hover) var(--ease); }
+.field__label::before { content: ""; position: absolute; left: 0; top: .22em; width: 8px; height: 8px; background: var(--accent); transform: scale(0); transition: transform var(--dur-hover) var(--ease); }
+.field__input { width: 100%; min-width: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; color: var(--fg); outline: 0; appearance: none; -webkit-appearance: none; font-family: var(--font-text); font-weight: var(--w-text); font-size: 1.0625rem; line-height: 1.3; }
+.field__input::placeholder { color: var(--fg-2); opacity: 1; }
+.field__input:-webkit-autofill { -webkit-text-fill-color: var(--fg); box-shadow: 0 0 0 100px var(--bg) inset; caret-color: var(--fg); }
+.field:hover { border-bottom-color: var(--edge); }
+.field:focus-within { border-bottom-color: var(--fg); }
+.field:focus-within .field__label { padding-left: 16px; }
+.field:focus-within .field__label::before { transform: scale(1); }
+.field--error { border-bottom-color: var(--err); }
+.field__error { grid-column: 2; display: flex; gap: .55em; align-items: flex-start; margin: 9px 0 0; color: var(--err); font-weight: var(--w-strong); font-size: .8125rem; line-height: 1.35; }
+.field__error::before { content: "!"; flex: none; width: 1.25em; height: 1.25em; display: grid; place-items: center; background: var(--err); color: var(--bg); border-radius: 50%; font-family: var(--font-display); font-size: .8em; line-height: 1; }
+.field__error:empty { display: none; }
+
+.choice { position: relative; display: inline-flex; align-items: center; gap: .5em; min-height: 36px; margin-top: var(--s-5); padding: 0 .95em 0 .75em; cursor: pointer; border: var(--border) solid var(--edge); font-weight: var(--w-medium); font-size: .875rem; line-height: 1.3; transition: background-color var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease); }
+.choice__input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.choice__mark { flex: none; width: 11px; height: 11px; background: var(--plus); transition: transform var(--dur-change) var(--ease); }
+.choice:hover { border-color: var(--fg); }
+.choice:has(:checked) { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.choice__input:checked + .choice__mark { transform: rotate(45deg); }
+.choice:has(:focus-visible) { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* The primary button: a square marker leads the words, and grows under the pointer until it is the button. */
+.btn { --h: 52px; position: relative; isolation: isolate; overflow: hidden; display: flex; width: fit-content; align-items: center; justify-content: center; gap: .8em; min-height: var(--h); margin-top: var(--s-6); padding: 0 1.5em 0 1.15em; white-space: nowrap; appearance: none; cursor: pointer; -webkit-tap-highlight-color: transparent; background: var(--accent); color: var(--accent-ink); border: var(--border) solid var(--accent); border-radius: var(--radius); font-family: var(--font-display); font-weight: var(--w-heading); text-transform: uppercase; letter-spacing: var(--track-control); font-size: var(--fs-control); line-height: 1; transition: color var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease), transform var(--dur-press) linear; }
+.btn::before { content: ""; flex: none; width: var(--marker); height: var(--marker); z-index: -1; background: var(--bg); transition: transform var(--dur-change) var(--ease); }
+.btn:hover::before { transform: scale(66); }
+.btn:hover { color: var(--fg); }
+.btn:active { transform: scale(.97); }
+.btn[aria-disabled="true"] { pointer-events: none; background: none; border-color: var(--line); color: var(--fg-2); }
+.btn[aria-disabled="true"]::before { background: none; outline: 1.5px solid var(--fg-2); outline-offset: -1.5px; }
+
+/* Opened: the accent crosses the screen, and the preview is behind it. */
+.cross { position: fixed; inset: 0; z-index: 9; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+.is-open .cross { transform: scaleX(1); transition: transform calc(var(--dur-enter) / 2) var(--ease); }
+
+@media (max-width: 899px) {
+  .gate { align-items: start; align-content: start; row-gap: var(--s-8); }
+  .gate__say, .gate__form, .gate__note { grid-column: 1 / -1; }
+  .gate__form { max-width: 34rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 1ms !important; }
+  .cross { display: none; }
+}
+</style>
+</head>
+<body>
+<main class="gate">
+  <div class="gate__say">
+    <h1><span>Private</span> <span>preview</span></h1>
+    <p class="gate__lead">This page opens with the password you were sent.</p>
+  </div>
+  <form class="gate__form" id="gate" autocomplete="on" novalidate>
+    <div class="fields">
+      <label class="field"><span class="field__label">Name</span><span class="field__control"><input class="field__input" id="who" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Any name works"></span></label>
+      <label class="field" id="pw-field"><span class="field__label">Password</span><span class="field__control"><input class="field__input" id="pw" name="password" type="password" autocomplete="current-password" required aria-describedby="msg"></span><p class="field__error" id="msg" role="alert"></p></label>
+    </div>
+    <label class="choice"><input class="choice__input" id="keep" type="checkbox" checked><span class="choice__mark" aria-hidden="true"></span>Keep me signed in on this device</label>
+    <button class="btn" id="go" type="submit">Open the preview</button>
+  </form>
+  <p class="gate__note gate__note--nojs">This preview needs JavaScript to open.</p>
+  <p class="gate__note" id="cant" hidden>This window can’t open the preview. Try a regular (not private) window in Chrome, Edge, Safari or Firefox.</p>
+</main>
+<div class="cross" aria-hidden="true"></div>
+<script>
+(function () {
+  'use strict';
+  var C = { base: '/pmr-preview/', salt: '3PMQaa0Skvh79cCctNpPWw==', iter: 600000, home: 'homepage/a/' };
+  var root = document.documentElement, $ = function (s) { return document.querySelector(s); };
+  var form = $('#gate'), msg = $('#msg'), btn = $('#go'), pw = $('#pw');
+
+  // Where to go once it is open: the address that was asked for, or the homepage.
+  var q = new URLSearchParams(location.search);
+  var here = location.pathname.indexOf(C.base) === 0 ? location.pathname.slice(C.base.length) : '';
+  var deep = here !== '' && here !== 'index.html' && here !== '404.html';
+  var next = deep ? here + location.search + location.hash : (q.get('next') || C.home);
+  if (/^[a-z][a-z0-9+.-]*:|^\/|\\/i.test(next)) next = C.home;
+
+  function cant() { root.classList.remove('is-checking'); form.hidden = true; $('#cant').hidden = false; }
+  if (!('serviceWorker' in navigator) || !window.crypto || !crypto.subtle || !window.indexedDB) return cant();
+
+  // The key is kept in this browser, never the password.
+  function db() { return new Promise(function (yes, no) { var r = indexedDB.open('preview', 1); r.onupgradeneeded = function () { r.result.createObjectStore('kv'); }; r.onsuccess = function () { yes(r.result); }; r.onerror = function () { no(r.error); }; }); }
+  function tx(mode, work) { return db().then(function (d) { return new Promise(function (yes, no) { var t = d.transaction('kv', mode), out = work(t.objectStore('kv')); t.oncomplete = function () { yes(out && out.result); }; t.onerror = function () { no(t.error); }; }); }); }
+  var kept = { get: function () { return tx('readonly', function (s) { return s.get('k'); }); }, put: function (v) { return tx('readwrite', function (s) { return s.put(v, 'k'); }); }, drop: function () { return tx('readwrite', function (s) { return s.delete('k'); }); } };
+
+  function bytes(b64) { return Uint8Array.from(atob(b64), function (c) { return c.charCodeAt(0); }); }
+  // Does this key open the list of what is here? true, false, or it throws when the list cannot be fetched.
+  function opens(key) {
+    return fetch(C.base + 'm.bin', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error('unreachable'); return r.arrayBuffer(); }).then(function (buf) {
+      var b = new Uint8Array(buf);
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.subarray(0, 12) }, key, b.subarray(12)).then(function () { return true; }, function () { return false; });
+    });
+  }
+  var worker = navigator.serviceWorker.register(C.base + 'sw.js', { scope: C.base }).then(function () { return navigator.serviceWorker.ready; });
+
+  function enter() {
+    // back at this sign-in three times within a few seconds, key in hand: this window cannot keep the worker
+    var now = Date.now(), t = { at: 0, n: 0 };
+    try { t = JSON.parse(sessionStorage.getItem('tries')) || t; } catch (e) {}
+    t = now - t.at < 8000 ? { at: now, n: t.n + 1 } : { at: now, n: 1 };
+    try { sessionStorage.setItem('tries', JSON.stringify(t)); } catch (e) {}
+    if (t.n > 2) return cant();
+    return worker.then(function (reg) { if (reg.active) reg.active.postMessage('fresh'); location.replace(C.base + next); });
+  }
+  function show(text) { root.classList.remove('is-checking'); if (text) say(text); pw.focus(); }
+  function say(text) { msg.textContent = text; $('#pw-field').classList.toggle('field--error', !!text); busy(false); }
+  function busy(on) { btn.setAttribute('aria-disabled', on ? 'true' : 'false'); btn.textContent = on ? 'Opening' : 'Open the preview'; }
+
+  if (q.has('out')) { kept.drop().then(function () { return worker; }).then(function (reg) { if (reg.active) reg.active.postMessage('fresh'); }).catch(function () {}).then(function () { show(''); }); }
+  else kept.get().then(function (rec) {
+    if (!rec || (rec.exp && rec.exp < Date.now())) return false;
+    return opens(rec.key);
+  }).then(function (ok) { return ok ? enter() : show(''); }).catch(function () { show(''); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (btn.getAttribute('aria-disabled') === 'true') return;
+    if (!pw.value) return say('Enter the password to open the preview.');
+    msg.textContent = ''; busy(true);
+    crypto.subtle.importKey('raw', new TextEncoder().encode(pw.value), 'PBKDF2', false, ['deriveKey']).then(function (base) {
+      return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: bytes(C.salt), iterations: C.iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+    }).then(function (key) {
+      return opens(key).then(function (ok) {
+        if (!ok) { say('That password doesn’t open this preview. Check it and try again.'); pw.select(); return; }
+        return kept.put({ key: key, exp: $('#keep').checked ? 0 : Date.now() + 12 * 3600 * 1000 }).then(function () {
+          try { sessionStorage.removeItem('tries'); } catch (e) {}
+          root.classList.add('is-open');
+          var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+          setTimeout(enter, still ? 0 : 470);
+        });
+      });
+    }).catch(function () { say('The preview couldn’t be reached. Check the connection and try again.'); });
+  });
+})();
+</script>
+</body>
+</html>
