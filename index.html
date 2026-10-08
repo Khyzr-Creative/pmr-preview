@@ -47,13 +47,15 @@ html.js .gate__note--nojs { display: none; }
 .field__error::before { content: "!"; flex: none; width: 1.25em; height: 1.25em; display: grid; place-items: center; background: var(--err); color: var(--bg); border-radius: 50%; font-family: var(--font-display); font-size: .8em; line-height: 1; }
 .field__error:empty { display: none; }
 
-.choice { position: relative; display: inline-flex; align-items: center; gap: .5em; min-height: 36px; margin-top: var(--s-5); padding: 0 .95em 0 .75em; cursor: pointer; border: var(--border) solid var(--edge); font-weight: var(--w-medium); font-size: .875rem; line-height: 1.3; transition: background-color var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease); }
-.choice__input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
-.choice__mark { flex: none; width: 11px; height: 11px; background: var(--plus); transition: transform var(--dur-change) var(--ease); }
-.choice:hover { border-color: var(--fg); }
-.choice:has(:checked) { background: var(--fg); border-color: var(--fg); color: var(--bg); }
-.choice__input:checked + .choice__mark { transform: rotate(45deg); }
-.choice:has(:focus-visible) { outline: 2px solid var(--focus); outline-offset: 3px; }
+/* One thing that is on or off: an empty box, or the accent with a tick in it. */
+.check { position: relative; display: inline-grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; margin-top: var(--s-5); cursor: pointer; font-size: .9375rem; line-height: 1.4; }
+.check__input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.check__box { position: relative; width: 22px; height: 22px; margin-top: -.06em; border: var(--border) solid var(--edge); transition: background-color var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease); }
+.check__box::after { content: ""; position: absolute; left: 50%; top: 50%; width: 11px; height: 6px; margin: -5px 0 0 -5.5px; border: solid var(--accent-ink); border-width: 0 0 2.5px 2.5px; transform: rotate(-45deg) scale(0); transition: transform var(--dur-hover) var(--ease); }
+.check:hover .check__box { border-color: var(--fg); }
+.check__input:checked + .check__box { background: var(--accent); border-color: var(--accent); }
+.check__input:checked + .check__box::after { transform: rotate(-45deg) scale(1); }
+.check__input:focus-visible + .check__box { outline: 2px solid var(--focus); outline-offset: 3px; }
 
 /* The primary button: a square marker leads the words, and grows under the pointer until it is the button. */
 .btn { --h: 52px; position: relative; isolation: isolate; overflow: hidden; display: flex; width: fit-content; align-items: center; justify-content: center; gap: .8em; min-height: var(--h); margin-top: var(--s-6); padding: 0 1.5em 0 1.15em; white-space: nowrap; appearance: none; cursor: pointer; -webkit-tap-highlight-color: transparent; background: var(--accent); color: var(--accent-ink); border: var(--border) solid var(--accent); border-radius: var(--radius); font-family: var(--font-display); font-weight: var(--w-heading); text-transform: uppercase; letter-spacing: var(--track-control); font-size: var(--fs-control); line-height: 1; transition: color var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease), transform var(--dur-press) linear; }
@@ -90,7 +92,7 @@ html.js .gate__note--nojs { display: none; }
       <label class="field"><span class="field__label">Name</span><span class="field__control"><input class="field__input" id="who" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Any name works"></span></label>
       <label class="field" id="pw-field"><span class="field__label">Password</span><span class="field__control"><input class="field__input" id="pw" name="password" type="password" autocomplete="current-password" required aria-describedby="msg"></span><p class="field__error" id="msg" role="alert"></p></label>
     </div>
-    <label class="choice"><input class="choice__input" id="keep" type="checkbox" checked><span class="choice__mark" aria-hidden="true"></span>Keep me signed in on this device</label>
+    <div><label class="check"><input class="check__input" id="keep" type="checkbox" checked><span class="check__box" aria-hidden="true"></span><span>Keep me signed in on this device</span></label></div>
     <button class="btn" id="go" type="submit">Open the preview</button>
   </form>
   <p class="gate__note gate__note--nojs">This preview needs JavaScript to open.</p>
@@ -100,11 +102,11 @@ html.js .gate__note--nojs { display: none; }
 <script>
 (function () {
   'use strict';
-  var C = { base: '/pmr-preview/', salt: '3PMQaa0Skvh79cCctNpPWw==', iter: 600000, home: 'homepage/a/' };
+  var C = { base: '/pmr-preview/', salt: '3PMQaa0Skvh79cCctNpPWw==', iter: 600000, home: 'homepage/front/' };
   var root = document.documentElement, $ = function (s) { return document.querySelector(s); };
   var form = $('#gate'), msg = $('#msg'), btn = $('#go'), pw = $('#pw');
 
-  // Where to go once it is open: the address that was asked for, or the homepage.
+  // Where to go once it is open: the address that was asked for, or the front page.
   var q = new URLSearchParams(location.search);
   var here = location.pathname.indexOf(C.base) === 0 ? location.pathname.slice(C.base.length) : '';
   var deep = here !== '' && here !== 'index.html' && here !== '404.html';
