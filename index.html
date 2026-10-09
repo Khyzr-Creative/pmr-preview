@@ -39,7 +39,7 @@ html.js .gate__note--nojs { display: none; }
 .field__input { width: 100%; min-width: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; color: var(--fg); outline: 0; appearance: none; -webkit-appearance: none; font-family: var(--font-text); font-weight: var(--w-text); font-size: 1.0625rem; line-height: 1.3; }
 .field__input::placeholder { color: var(--fg-2); opacity: 1; }
 .field__input:-webkit-autofill { -webkit-text-fill-color: var(--fg); box-shadow: 0 0 0 100px var(--bg) inset; caret-color: var(--fg); }
-.field:hover { border-bottom-color: var(--edge); }
+@media (hover: hover) and (pointer: fine) { .field:hover { border-bottom-color: var(--edge); } }
 .field:focus-within { border-bottom-color: var(--fg); }
 .field:focus-within .field__label { padding-left: 16px; }
 .field:focus-within .field__label::before { transform: scale(1); }
@@ -47,13 +47,18 @@ html.js .gate__note--nojs { display: none; }
 .field__error { grid-column: 2; display: flex; gap: .55em; align-items: flex-start; margin: 9px 0 0; color: var(--err); font-weight: var(--w-strong); font-size: .8125rem; line-height: 1.35; }
 .field__error::before { content: "!"; flex: none; width: 1.25em; height: 1.25em; display: grid; place-items: center; background: var(--err); color: var(--bg); border-radius: 50%; font-family: var(--font-display); font-size: .8em; line-height: 1; }
 .field__error:empty { display: none; }
+/* On a narrow screen the label stands above its answer, so the answer and the error under it have the whole line. */
+@media (max-width: 540px) {
+  .field { grid-template-columns: minmax(0, 1fr); row-gap: var(--s-2); }
+  .field__error { grid-column: 1; margin-top: 0; }
+}
 
 /* One thing that is on or off: an empty box, or the accent with a tick in it. */
 .check { position: relative; display: inline-grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; margin-top: var(--s-5); cursor: pointer; -webkit-tap-highlight-color: transparent; font-size: .9375rem; line-height: 1.4; }
 .check__input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
 .check__box { position: relative; width: 22px; height: 22px; margin-top: -.06em; border: var(--border) solid var(--edge); transition: background-color var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease); }
 .check__box::after { content: ""; position: absolute; left: 50%; top: 50%; width: 11px; height: 6px; margin: -5px 0 0 -5.5px; border: solid var(--accent-ink); border-width: 0 0 2.5px 2.5px; transform: rotate(-45deg) scale(0); transition: transform var(--dur-hover) var(--ease); }
-.check:hover .check__box { border-color: var(--fg); }
+@media (hover: hover) and (pointer: fine) { .check:hover .check__box { border-color: var(--fg); } }
 .check__input:checked + .check__box { background: var(--accent); border-color: var(--accent); }
 .check__input:checked + .check__box::after { transform: rotate(-45deg) scale(1); }
 .check__input:focus-visible + .check__box { outline: 2px solid var(--focus); outline-offset: 3px; }
@@ -62,12 +67,17 @@ html.js .gate__note--nojs { display: none; }
   .check::after { content: ""; position: absolute; inset: 50% 0 auto; height: 44px; transform: translateY(-50%); }
 }
 
-/* The primary button: a square marker leads the words, and grows under the pointer until it is the button. */
+/* The primary button: a square marker leads the words, and grows in hand until it is the button: under a pointer, or
+   pressed. A finger has no hover, so its press is the whole answer: it comes at once, and lets go in its own time. */
 .btn { --h: 52px; position: relative; isolation: isolate; overflow: hidden; display: flex; width: fit-content; align-items: center; justify-content: center; gap: .8em; min-height: var(--h); margin-top: var(--s-6); padding: 0 1.5em 0 1.15em; white-space: nowrap; appearance: none; cursor: pointer; -webkit-tap-highlight-color: transparent; background: var(--accent); color: var(--accent-ink); border: var(--border) solid var(--accent); border-radius: var(--radius); font-family: var(--font-display); font-weight: var(--w-heading); text-transform: uppercase; letter-spacing: var(--track-control); font-size: var(--fs-control); line-height: 1; transition: color var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease), transform var(--dur-press) linear; }
 .btn::before { content: ""; flex: none; width: var(--marker); height: var(--marker); z-index: -1; background: var(--bg); transition: transform var(--dur-change) var(--ease); }
-.btn:hover::before { transform: scale(66); }
-.btn:hover { color: var(--fg); }
-.btn:active { transform: scale(.97); }
+.btn:active::before { transform: scale(66); }
+.btn:active { color: var(--fg); transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover::before { transform: scale(66); }
+  .btn:hover { color: var(--fg); }
+}
+@media (hover: none), (pointer: coarse) { .btn:active, .btn:active::before { transition-duration: var(--dur-press); } }
 .btn[aria-disabled="true"] { pointer-events: none; background: none; border-color: var(--line); color: var(--fg-2); }
 .btn[aria-disabled="true"]::before { background: none; outline: 1.5px solid var(--fg-2); outline-offset: -1.5px; }
 
