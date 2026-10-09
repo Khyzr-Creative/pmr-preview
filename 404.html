@@ -6,12 +6,14 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="referrer" content="no-referrer">
 <title>Private preview</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Montserrat:wght@700..800&display=swap">
+<link rel="preload" href="/pmr-preview/f/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/pmr-preview/f/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.className = 'js is-checking';</script>
 <style>
 :root { --black: #000000; --lifted: #171717; --teal-black: #04161C; --dark-gray: #2F2F2F; --mid-gray: #8B8B90; --light-gray: #F3F3F3; --white: #FFFFFF; --orange: #F54703; --teal: #00434D; --green: #46D38A; --amber: #FFB020; --pink: #FF6584; --bg: var(--black); --bg-2: var(--lifted); --fg: var(--light-gray); --fg-2: var(--mid-gray); --line: var(--dark-gray); --edge: var(--mid-gray); --accent: var(--orange); --accent-ink: var(--black); --accent-text: var(--orange); --accent-2: var(--teal); --accent-2-ink: var(--light-gray); --ok: var(--green); --warn: var(--amber); --err: var(--pink); --focus: var(--light-gray); --font-display: "Montserrat", "Arial Black", sans-serif; --font-text: "DM Sans", system-ui, sans-serif; --w-display: 800; --w-heading: 700; --w-text: 400; --w-medium: 500; --w-strong: 700; --fs-display-1: clamp(2.5rem, 1.1rem + 5.6vw, 7.25rem); --fs-display-2: clamp(2.25rem, 1.1rem + 3.9vw, 5rem); --fs-figure: clamp(2.75rem, 1.4rem + 4.2vw, 5.75rem); --fs-h2: clamp(1.875rem, 1.4rem + 2.2vw, 3.5rem); --fs-h3: clamp(1.3125rem, 1.15rem + .8vw, 1.875rem); --fs-h4: .9375rem; --fs-lead: clamp(1.125rem, 1.02rem + .5vw, 1.4375rem); --fs-body: 1rem; --fs-small: .875rem; --fs-control: .875rem; --fs-control-s: .75rem; --fs-label: .6875rem; --track-display: -.022em; --track-heading: -.012em; --track-h4: .06em; --track-control: .09em; --track-label: .14em; --lh-display: .98; --lh-heading: 1.1; --lh-lead: 1.38; --lh-text: 1.55; --lh-small: 1.45; --radius: 0px; --border: 2px; --rule: 2px; --hair: 1px; --marker: .6em; --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 40px; --s-8: 48px; --s-9: 64px; --s-10: 80px; --s-11: 120px; --container: 1206px; --gutter: clamp(24px, 5.86vw, 80px); --gap: clamp(16px, 1.76vw, 24px); --section-y: clamp(64px, 8.8vw, 120px); --dur-press: 80ms; --dur-hover: 450ms; --dur-change: 600ms; --dur-enter: 900ms; --stagger: 110ms; --ease: cubic-bezier(.625, .05, 0, 1); --stroke: linear-gradient(currentColor 0 0); --plus: var(--stroke) 50% 50% / 100% 1.5px no-repeat, var(--stroke) 50% 50% / 1.5px 100% no-repeat; --corners: var(--stroke) 0 4px / 9px 1px no-repeat, var(--stroke) 4px 0 / 1px 9px no-repeat, var(--stroke) 100% 4px / 9px 1px no-repeat, var(--stroke) calc(100% - 4px) 0 / 1px 9px no-repeat, var(--stroke) 0 calc(100% - 4px) / 9px 1px no-repeat, var(--stroke) 4px 100% / 1px 9px no-repeat, var(--stroke) 100% calc(100% - 4px) / 9px 1px no-repeat, var(--stroke) calc(100% - 4px) 100% / 1px 9px no-repeat; } @media (max-width: 899px) { :root { --fs-label: .75rem; } }
+/* The two faces, from this folder: the page asks no other site for anything. */
+@font-face { font-family: "Montserrat"; font-style: normal; font-weight: 700 800; font-display: swap; src: url(/pmr-preview/f/montserrat.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 400 700; font-display: swap; src: url(/pmr-preview/f/dm-sans.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 *, *::before, *::after { box-sizing: border-box; }
 html { background: var(--bg); color: var(--fg); -webkit-text-size-adjust: 100%; }
 body { margin: 0; min-height: 100svh; display: grid; font-family: var(--font-text); font-size: var(--fs-body); line-height: var(--lh-text); -webkit-font-smoothing: antialiased; }
@@ -90,6 +92,8 @@ html.js .gate__note--nojs { display: none; }
   .gate__say, .gate__form, .gate__note { grid-column: 1 / -1; }
   .gate__form { max-width: 34rem; }
 }
+/* A short phone: the page closes up, so the button is still on the screen when a password is refused. */
+@media (max-width: 599px) and (max-height: 620px) { .gate { padding-block: var(--s-6); row-gap: var(--s-6); } }
 /* A phone on its side has the width for both and not the height for one over the other: the statement beside the form again. */
 @media (min-width: 600px) and (max-width: 899px) and (max-height: 480px) {
   .gate { padding-block: var(--s-5); align-items: end; align-content: center; }

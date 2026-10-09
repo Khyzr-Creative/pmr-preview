@@ -103,6 +103,6 @@ self.addEventListener('fetch', function (e) {
   var url = new URL(e.request.url);
   if (url.origin !== self.location.origin || url.pathname.indexOf(BASE) !== 0 || e.request.method !== 'GET') return;
   var rel = url.pathname.slice(BASE.length);
-  if (PLAIN[rel] || rel.indexOf('b/') === 0) return;                        // the sign-in, this worker and the sealed files go out as they are
+  if (PLAIN[rel] || rel.indexOf('b/') === 0 || rel.indexOf('f/') === 0) return;   // the sign-in, its two faces, this worker and the sealed files go out as they are
   e.respondWith(serve(e.request, rel, url));
 });
