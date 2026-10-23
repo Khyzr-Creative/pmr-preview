@@ -7,6 +7,7 @@ var PLAIN = { '': 1, 'index.html': 1, '404.html': 1, 'sw.js': 1, 'm.bin': 1, 'ro
 var state = null, stamp = 0, opening = null;
 var held = new Map(), heldBytes = 0, ROOM = 96 * 1024 * 1024;   // opened files kept while the worker lives
 var KEPT = 'sealed';                                            // the browser's own cache: sealed files, as they came
+var SLOT = 'k' + BASE;                                          // where this preview's key is kept; another at this address keeps its own
 var PRESS = typeof DecompressionStream === 'function';          // text is sealed pressed (gzip) too: taken where it can be opened out
 
 self.addEventListener('install', function () { self.skipWaiting(); });
@@ -18,7 +19,14 @@ function kept() {
     var r = indexedDB.open('preview', 1);
     r.onupgradeneeded = function () { r.result.createObjectStore('kv'); };
     r.onerror = function () { no(r.error); };
-    r.onsuccess = function () { var g = r.result.transaction('kv', 'readonly').objectStore('kv').get('k'); g.onsuccess = function () { yes(g.result); }; g.onerror = function () { no(g.error); }; };
+    r.onsuccess = function () {
+      var kv = r.result.transaction('kv', 'readonly').objectStore('kv'), g = kv.get(SLOT);
+      g.onerror = function () { no(g.error); };
+      g.onsuccess = function () {                                   // a key kept before the previews were told apart: under k
+        if (g.result) return yes(g.result);
+        var o = kv.get('k'); o.onsuccess = function () { yes(o.result); }; o.onerror = function () { no(o.error); };
+      };
+    };
   });
 }
 function unseal(key, buf) { var b = new Uint8Array(buf); return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.subarray(0, 12) }, key, b.subarray(12)); }
@@ -35,12 +43,12 @@ function sealed(name) {
     });
   }).catch(function () { return fetch(url); });
 }
-// What the list no longer names is dropped from that cache.
+// What the list no longer names is dropped from that cache: this preview's files, not another's at the same address.
 function prune(files) {
   if (!self.caches) return;
   var named = {};
   Object.keys(files).forEach(function (p) { named[files[p].b] = 1; if (files[p].z) named[files[p].z] = 1; });
-  caches.open(KEPT).then(function (c) { return c.keys().then(function (all) { all.forEach(function (q) { if (!named[q.url.slice(q.url.lastIndexOf('/') + 1)]) c.delete(q); }); }); }).catch(function () {});
+  caches.open(KEPT).then(function (c) { return c.keys().then(function (all) { all.forEach(function (q) { if (new URL(q.url).pathname.indexOf(BASE + 'b/') === 0 && !named[q.url.slice(q.url.lastIndexOf('/') + 1)]) c.delete(q); }); }); }).catch(function () {});
 }
 
 // The key and the list of what is here. Read again after a minute, so a new staging is picked up.

@@ -144,7 +144,18 @@ html.js .gate__note--nojs { display: none; }
   // The key is kept in this browser, never the password.
   function db() { return new Promise(function (yes, no) { var r = indexedDB.open('preview', 1); r.onupgradeneeded = function () { r.result.createObjectStore('kv'); }; r.onsuccess = function () { yes(r.result); }; r.onerror = function () { no(r.error); }; }); }
   function tx(mode, work) { return db().then(function (d) { return new Promise(function (yes, no) { var t = d.transaction('kv', mode), out = work(t.objectStore('kv')); t.oncomplete = function () { yes(out && out.result); }; t.onerror = function () { no(t.error); }; }); }); }
-  var kept = { get: function () { return tx('readonly', function (s) { return s.get('k'); }); }, put: function (v) { return tx('readwrite', function (s) { return s.put(v, 'k'); }); }, drop: function () { return tx('readwrite', function (s) { return s.delete('k'); }); } };
+  // Each preview at this address keeps its key under a name of its own, so signing in to one signs no other out. A key kept
+  // before they were told apart, under k, is still read where this one has none, and goes with this one's if it opens it.
+  var SLOT = 'k' + C.base;
+  function read(name) { return tx('readonly', function (s) { return s.get(name); }); }
+  var kept = {
+    get: function () { return read(SLOT).then(function (rec) { return rec || read('k'); }); },
+    put: function (v) { return tx('readwrite', function (s) { return s.put(v, SLOT); }); },
+    drop: function () {
+      return read('k').then(function (old) { return old ? opens(old.key).catch(function () { return false; }) : false; })
+        .then(function (ours) { return tx('readwrite', function (s) { s.delete(SLOT); if (ours) s.delete('k'); }); });
+    }
+  };
 
   function bytes(b64) { return Uint8Array.from(atob(b64), function (c) { return c.charCodeAt(0); }); }
   // Does this key open the list of what is here? true, false, or it throws when the list cannot be fetched.
